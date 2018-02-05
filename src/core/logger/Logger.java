@@ -1,10 +1,9 @@
-package Logger;
+package core.logger;
 
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
-
-import Threading.Thread;
+import core.threading.Thread;
 
 public class Logger extends Thread implements ILogger {
 	public class Entry {

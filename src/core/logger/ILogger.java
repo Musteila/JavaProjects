@@ -1,4 +1,4 @@
-package Logger;
+package core.logger;
 
 public interface ILogger {
 

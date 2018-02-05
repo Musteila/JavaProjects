@@ -1,4 +1,4 @@
-package Threading;
+package core.threading;
 
 public abstract class Thread extends java.lang.Thread implements IThread {
 	private Integer identifier;
