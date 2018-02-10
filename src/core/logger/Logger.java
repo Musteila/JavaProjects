@@ -50,15 +50,23 @@ public class Logger extends Thread implements ILogger {
 		
 		@Override
 		public String toString() {
-			return "Hallo";
+			return this.timemstamp.toString() + "\t" + this.direction.toString() + "\t" + this.severity.toString() + "\t" + this.text;
 		}
 	}
 	
+	protected static Logger instance = null;
 	protected Queue<Entry> queue = null;
 	protected final Object mutex = new Object();
 	
-	public Logger(String name) {
-		super(name);
+	public static Logger getInstance() {
+		if (null == instance) {
+			instance = new Logger("Logger");
+		}
+		return instance;
+	}
+	
+	protected Logger(String name) {
+		super("Logger");
 	}
 	
 	public void create(String[] arguments) {
@@ -76,13 +84,15 @@ public class Logger extends Thread implements ILogger {
 	}
 	
 	protected void running() {
-		synchronized (this.mutex) {
-			while (!this.queue.isEmpty()) {
-				Logger.Entry entry = this.queue.poll();
-				System.out.println(entry.toString());
+		while (true) {
+			synchronized (this.mutex) {
+				while (!this.queue.isEmpty()) {
+					Logger.Entry entry = this.queue.poll();
+					System.out.println(entry.toString());
+				}
 			}
+			super.suspend(200);
 		}
-		super.suspend(1000);
 	}
 	
 	@Override

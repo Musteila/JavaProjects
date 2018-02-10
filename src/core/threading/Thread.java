@@ -8,16 +8,21 @@ public abstract class Thread extends java.lang.Thread implements IThread {
 	}
 
 	@Override
-	public abstract void create(String[] arguments);
+	public void create(String[] arguments) {
+	}
 	
 	@Override
-	public abstract void initialize(String[] arguments);
+	public void initialize(String[] arguments) {
+	}
 	
 	@Override
-	public abstract void startup(String[] arguments);
+	public void startup(String[] arguments) {
+		super.start();
+	}
 	
 	@Override
-	public abstract void shutdown(String[] arguments);
+	public void shutdown(String[] arguments) {
+	}
 	
 	@Override
 	public Integer getIdentifier() {
@@ -27,9 +32,7 @@ public abstract class Thread extends java.lang.Thread implements IThread {
 	@Override
 	public void run()
 	{
-		while (true) {
-			running();
-		}
+		running();
 	}
 	
 	protected abstract void running();
